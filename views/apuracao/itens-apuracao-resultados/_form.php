@@ -13,6 +13,7 @@ use kartik\file\FileInput;
 <div class="itens-apuracao-resultados-form">
 
     <?php $form = ActiveForm::begin(); ?>
+     <?php echo $form->errorSummary($model); ?>  
 
     <?php
         echo $form->field($apuracaoResultado, 'apure_mes')->widget(Select2::classname(), [
@@ -86,6 +87,9 @@ use kartik\file\FileInput;
                     <div class="col-md-3">
                         <?= $form->field($model, "[{$i}]item_apure_acaocomplementar")->textarea(['maxlength' => true, 'rows' => 3]) ?>
                     </div>
+
+                    <?= $form->field($model, "[{$i}]tema_id")->hiddenInput(['value' => $tema->tema_id])->label(false)  ?>
+
                 </div>
 
             </div>

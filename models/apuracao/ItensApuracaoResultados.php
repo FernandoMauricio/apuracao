@@ -39,7 +39,7 @@ class ItensApuracaoResultados extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item_apure_acaorealizada', 'item_apure_local', 'item_apure_datarealizacao', 'item_apure_motivo', 'item_apure_publico', 'item_apure_qntpessoas', 'tema_id', 'apuracao_id'], 'required'],
+            [['item_apure_acaorealizada', 'item_apure_local', 'item_apure_datarealizacao', 'item_apure_motivo', 'item_apure_publico', 'item_apure_qntpessoas', 'tema_id'], 'required'],
             [['item_apure_acaorealizada', 'item_apure_local'], 'string'],
             [['item_apure_qntpessoas', 'tema_id', 'apuracao_id'], 'integer'],
             [['item_apure_datarealizacao', 'item_apure_motivo', 'item_apure_publico', 'item_apure_parceiros', 'item_apure_src_arquivo'], 'string', 'max' => 255],

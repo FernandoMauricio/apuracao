@@ -76,8 +76,23 @@ class ItensApuracaoResultadosController extends Controller
         $apuracaoResultado->apure_unidade = $session['sess_unidade'];
         $apuracaoResultado->situapuracao_id = 1; //Em elaboração
 
-        if ($model->load(Yii::$app->request->post())) {
-            return $this->redirect(['view', 'id' => $model->item_apure_id]);
+        if ($model->load(Yii::$app->request->post()) && $apuracaoResultado->load(Yii::$app->request->post()) && $apuracaoResultado->save()) {
+
+            foreach($_POST['ItensApuracaoResultados'] as $i => $apuracao){
+                $model =  new ItensApuracaoResultados();
+                $model->apuracao_id = $apuracaoResultado->apure_id;
+                $model->item_apure_acaorealizada = $_POST['ItensApuracaoResultados'][$i]['item_apure_acaorealizada'];
+                $model->item_apure_local = $_POST['ItensApuracaoResultados'][$i]['item_apure_local'];
+                $model->item_apure_datarealizacao = $_POST['ItensApuracaoResultados'][$i]['item_apure_datarealizacao'];
+                $model->item_apure_motivo = $_POST['ItensApuracaoResultados'][$i]['item_apure_motivo'];
+                $model->item_apure_publico = $_POST['ItensApuracaoResultados'][$i]['item_apure_publico'];
+                $model->item_apure_qntpessoas = $_POST['ItensApuracaoResultados'][$i]['item_apure_qntpessoas'];
+                $model->item_apure_parceiros = $_POST['ItensApuracaoResultados'][$i]['item_apure_parceiros'];
+                $model->item_apure_acaocomplementar = $_POST['ItensApuracaoResultados'][$i]['item_apure_acaocomplementar'];
+                $model->tema_id = $_POST['ItensApuracaoResultados'][$i]['tema_id'];
+                $model->save(false);
+            }
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
