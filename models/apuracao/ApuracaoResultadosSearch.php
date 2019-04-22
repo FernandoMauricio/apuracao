@@ -17,8 +17,8 @@ class ApuracaoResultadosSearch extends ApuracaoResultados
     public function rules()
     {
         return [
-            [['apure_id', 'apure_qntpessoas', 'tema_id', 'situacao_id'], 'integer'],
-            [['apure_mes', 'apure_unidade', 'apure_acaorealizada', 'apure_local', 'apure_datarealizacao', 'apure_motivo', 'apure_publico', 'apure_parceiros', 'apure_acaocomplementar', 'apure_src_arquivo', 'apure_usuariocriacao', 'apure_datacriacao'], 'safe'],
+            [['apure_id', 'situapuracao_id'], 'integer'],
+            [['apure_mes', 'apure_unidade', 'apure_usuariocriacao', 'apure_datacriacao'], 'safe'],
         ];
     }
 
@@ -59,23 +59,13 @@ class ApuracaoResultadosSearch extends ApuracaoResultados
         // grid filtering conditions
         $query->andFilterWhere([
             'apure_id' => $this->apure_id,
-            'apure_qntpessoas' => $this->apure_qntpessoas,
-            'apure_datacriacao' => $this->apure_datacriacao,
-            'tema_id' => $this->tema_id,
-            'situacao_id' => $this->situacao_id,
+            'situapuracao_id' => $this->situapuracao_id,
         ]);
 
         $query->andFilterWhere(['like', 'apure_mes', $this->apure_mes])
             ->andFilterWhere(['like', 'apure_unidade', $this->apure_unidade])
-            ->andFilterWhere(['like', 'apure_acaorealizada', $this->apure_acaorealizada])
-            ->andFilterWhere(['like', 'apure_local', $this->apure_local])
-            ->andFilterWhere(['like', 'apure_datarealizacao', $this->apure_datarealizacao])
-            ->andFilterWhere(['like', 'apure_motivo', $this->apure_motivo])
-            ->andFilterWhere(['like', 'apure_publico', $this->apure_publico])
-            ->andFilterWhere(['like', 'apure_parceiros', $this->apure_parceiros])
-            ->andFilterWhere(['like', 'apure_acaocomplementar', $this->apure_acaocomplementar])
-            ->andFilterWhere(['like', 'apure_src_arquivo', $this->apure_src_arquivo])
-            ->andFilterWhere(['like', 'apure_usuariocriacao', $this->apure_usuariocriacao]);
+            ->andFilterWhere(['like', 'apure_usuariocriacao', $this->apure_usuariocriacao])
+            ->andFilterWhere(['like', 'apure_datacriacao', $this->apure_datacriacao]);
 
         return $dataProvider;
     }
