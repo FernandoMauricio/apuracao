@@ -17,7 +17,7 @@ class ApuracaoResultadosSearch extends ApuracaoResultados
     public function rules()
     {
         return [
-            [['apure_id', 'situapuracao_id'], 'integer'],
+            [['apure_id', 'situapuracao_id', 'apure_ano'], 'integer'],
             [['apure_mes', 'apure_unidade', 'apure_usuariocriacao', 'apure_datacriacao'], 'safe'],
         ];
     }
@@ -60,6 +60,7 @@ class ApuracaoResultadosSearch extends ApuracaoResultados
         $query->andFilterWhere([
             'apure_id' => $this->apure_id,
             'situapuracao_id' => $this->situapuracao_id,
+            'apure_ano' => $this->apure_ano,
         ]);
 
         $query->andFilterWhere(['like', 'apure_mes', $this->apure_mes])

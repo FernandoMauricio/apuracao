@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\apuracao\ItensApuracaoResultados */
 
-$this->title = 'Create Itens Apuracao Resultados';
-$this->params['breadcrumbs'][] = ['label' => 'Itens Apuracao Resultados', 'url' => ['index']];
+$this->title = 'Nova Apuração';
+$this->params['breadcrumbs'][] = ['label' => 'Apuração dos Resultados', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="itens-apuracao-resultados-create">

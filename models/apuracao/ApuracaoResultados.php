@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "apuracao_resultados".
  *
  * @property int $apure_id
+ * @property int $apure_ano
  * @property string $apure_mes
  * @property string $apure_unidade
  * @property string $apure_usuariocriacao
@@ -33,8 +34,8 @@ class ApuracaoResultados extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['apure_mes', 'apure_unidade', 'apure_usuariocriacao', 'apure_datacriacao', 'situapuracao_id'], 'required'],
-            [['situapuracao_id'], 'integer'],
+            [['apure_mes','apure_ano', 'apure_unidade', 'apure_usuariocriacao', 'apure_datacriacao', 'situapuracao_id'], 'required'],
+            [['situapuracao_id', 'apure_ano'], 'integer'],
             [['apure_mes', 'apure_usuariocriacao', 'apure_datacriacao'], 'string', 'max' => 45],
             [['apure_unidade'], 'string', 'max' => 255],
             [['situapuracao_id'], 'exist', 'skipOnError' => true, 'targetClass' => SituacaoApuracao::className(), 'targetAttribute' => ['situapuracao_id' => 'situap_id']],
@@ -47,12 +48,13 @@ class ApuracaoResultados extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'apure_id' => 'Apure ID',
-            'apure_mes' => 'Apure Mes',
-            'apure_unidade' => 'Apure Unidade',
-            'apure_usuariocriacao' => 'Apure Usuariocriacao',
-            'apure_datacriacao' => 'Apure Datacriacao',
-            'situapuracao_id' => 'Situapuracao ID',
+            'apure_id' => 'Cód.',
+            'apure_ano' => 'Ano',
+            'apure_mes' => 'Mês',
+            'apure_unidade' => 'Unidade',
+            'apure_usuariocriacao' => 'Criado por',
+            'apure_datacriacao' => 'Data da Criação',
+            'situapuracao_id' => 'Situação',
         ];
     }
 

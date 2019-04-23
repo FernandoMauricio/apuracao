@@ -4,6 +4,7 @@ namespace app\controllers\apuracao;
 
 use Yii;
 use app\models\apuracao\ApuracaoResultados;
+use app\models\apuracao\ApuracaoResultadosSearch;
 use app\models\apuracao\ItensApuracaoResultados;
 use app\models\apuracao\ItensApuracaoResultadosSearch;
 use app\models\apuracao\TemaAtividade;  
@@ -37,7 +38,7 @@ class ItensApuracaoResultadosController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ItensApuracaoResultadosSearch();
+        $searchModel = new ApuracaoResultadosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -54,8 +55,12 @@ class ItensApuracaoResultadosController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $temas = TemaAtividade::find()->where(['tema_status' => 1])->all();
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'temas' => $temas,
+            'model' => $model,
         ]);
     }
 
@@ -145,7 +150,7 @@ class ItensApuracaoResultadosController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = ItensApuracaoResultados::findOne($id)) !== null) {
+        if (($model = ApuracaoResultados::findOne($id)) !== null) {
             return $model;
         }
 

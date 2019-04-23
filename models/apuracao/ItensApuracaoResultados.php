@@ -41,9 +41,8 @@ class ItensApuracaoResultados extends \yii\db\ActiveRecord
         return [
             [['item_apure_acaorealizada', 'item_apure_local', 'item_apure_datarealizacao', 'item_apure_motivo', 'item_apure_publico', 'item_apure_qntpessoas', 'tema_id'], 'required'],
             [['item_apure_acaorealizada', 'item_apure_local'], 'string'],
-            [['item_apure_qntpessoas', 'tema_id', 'apuracao_id'], 'integer'],
-            [['item_apure_datarealizacao', 'item_apure_motivo', 'item_apure_publico', 'item_apure_parceiros', 'item_apure_src_arquivo'], 'string', 'max' => 255],
-            [['item_apure_acaocomplementar'], 'string', 'max' => 45],
+            [['tema_id', 'apuracao_id'], 'integer'],
+            [['item_apure_datarealizacao', 'item_apure_motivo', 'item_apure_publico', 'item_apure_parceiros', 'item_apure_src_arquivo', 'item_apure_qntpessoas', 'item_apure_acaocomplementar'], 'string', 'max' => 255],
             [['tema_id'], 'exist', 'skipOnError' => true, 'targetClass' => TemaAtividade::className(), 'targetAttribute' => ['tema_id' => 'tema_id']],
             [['apuracao_id'], 'exist', 'skipOnError' => true, 'targetClass' => ApuracaoResultados::className(), 'targetAttribute' => ['apuracao_id' => 'apure_id']],
         ];
@@ -55,16 +54,16 @@ class ItensApuracaoResultados extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'item_apure_id' => 'Item Apure ID',
-            'item_apure_acaorealizada' => 'Item Apure Acaorealizada',
-            'item_apure_local' => 'Item Apure Local',
-            'item_apure_datarealizacao' => 'Item Apure Datarealizacao',
-            'item_apure_motivo' => 'Item Apure Motivo',
-            'item_apure_publico' => 'Item Apure Publico',
-            'item_apure_qntpessoas' => 'Item Apure Qntpessoas',
-            'item_apure_parceiros' => 'Item Apure Parceiros',
-            'item_apure_acaocomplementar' => 'Item Apure Acaocomplementar',
-            'item_apure_src_arquivo' => 'Item Apure Src Arquivo',
+            'item_apure_id' => 'Cód.',
+            'item_apure_acaorealizada' => 'O que foi realizado?',
+            'item_apure_local' => 'Onde?',
+            'item_apure_datarealizacao' => 'Quando?',
+            'item_apure_motivo' => 'Por que?',
+            'item_apure_publico' => 'Quem foi beneficiado?',
+            'item_apure_qntpessoas' => 'Quantos?',
+            'item_apure_parceiros' => 'Envolveu parceiros?',
+            'item_apure_acaocomplementar' => 'Resultados complementares da ação',
+            'item_apure_src_arquivo' => 'Src Arquivo',
             'tema_id' => 'Tema ID',
             'apuracao_id' => 'Apuracao ID',
         ];
@@ -73,7 +72,7 @@ class ItensApuracaoResultados extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTema()
+    public function getTemaAtividade()
     {
         return $this->hasOne(TemaAtividade::className(), ['tema_id' => 'tema_id']);
     }

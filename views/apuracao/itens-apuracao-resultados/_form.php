@@ -15,28 +15,50 @@ use kartik\file\FileInput;
     <?php $form = ActiveForm::begin(); ?>
      <?php echo $form->errorSummary($model); ?>  
 
-    <?php
-        echo $form->field($apuracaoResultado, 'apure_mes')->widget(Select2::classname(), [
-            'data' =>  [
-                'Janeiro'=>'Janeiro', 
-                'Fevereiro' => 'Fevereiro', 
-                'Março'=>'Março', 
-                'Abril'=>'Abril',
-                'Maio'=>'Maio',
-                'Junho'=>'Junho',
-                'Julho'=>'Julho',
-                'Agosto'=>'Agosto',
-                'Setembro'=>'Setembro',
-                'Outubro'=>'Outubro',
-                'Novembro'=>'Novembro',
-                'Dezembro'=>'Dezembro',
-            ],
-            'options' => ['placeholder' => 'Selecione o mês...'],
-            'pluginOptions' => [
-                'allowClear' => true
-            ],
-        ]);
-    ?>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-md-4">
+
+            <?php
+                echo $form->field($apuracaoResultado, 'apure_ano')->widget(Select2::classname(), [
+                    'data' =>  [
+                        '2019'=>'2019', 
+                    ],
+                    'options' => ['placeholder' => 'Selecione o ano...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+            ?>
+        </div>
+
+        <div class="col-md-4">
+            <?php
+                echo $form->field($apuracaoResultado, 'apure_mes')->widget(Select2::classname(), [
+                    'data' =>  [
+                        'Janeiro'=>'Janeiro', 
+                        'Fevereiro' => 'Fevereiro', 
+                        'Março'=>'Março', 
+                        'Abril'=>'Abril',
+                        'Maio'=>'Maio',
+                        'Junho'=>'Junho',
+                        'Julho'=>'Julho',
+                        'Agosto'=>'Agosto',
+                        'Setembro'=>'Setembro',
+                        'Outubro'=>'Outubro',
+                        'Novembro'=>'Novembro',
+                        'Dezembro'=>'Dezembro',
+                    ],
+                    'options' => ['placeholder' => 'Selecione o mês...'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+            ?>
+        </div>
+    </div>
+</div>
+
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
     <?php foreach ($temas as $i => $tema) : ?>
@@ -97,6 +119,7 @@ use kartik\file\FileInput;
         <?php endforeach; ?>
     </div>
 </div>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
