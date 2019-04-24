@@ -121,7 +121,28 @@ class ItensApuracaoResultadosController extends Controller
         $temas = TemaAtividade::find()->where(['tema_status' => 1])->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->item_apure_id]);
+
+                foreach($_POST['ItensApuracaoResultados'] as $i => $apuracao){
+                $connection = Yii::$app->db;
+                $apuracao = ItensApuracaoResultados::find()->where(['apuracao_id' => $model->apure_id])->andWhere(['tema_id' => $i+1])->one();
+                $command = $connection->createCommand('
+                    UPDATE itens_apuracao_resultados 
+                    SET item_apure_acaorealizada="'.$_POST['ItensApuracaoResultados'][$i]['item_apure_acaorealizada'].'", 
+                        item_apure_local="'.$_POST['ItensApuracaoResultados'][$i]['item_apure_local'].'", 
+                        item_apure_datarealizacao="'.$_POST['ItensApuracaoResultados'][$i]['item_apure_datarealizacao'].'", 
+                        item_apure_motivo="'.$_POST['ItensApuracaoResultados'][$i]['item_apure_motivo'].'", 
+                        item_apure_publico="'.$_POST['ItensApuracaoResultados'][$i]['item_apure_publico'].'", 
+                        item_apure_qntpessoas="'.$_POST['ItensApuracaoResultados'][$i]['item_apure_qntpessoas'].'", 
+                        item_apure_parceiros="'.$_POST['ItensApuracaoResultados'][$i]['item_apure_parceiros'].'", 
+                        item_apure_acaocomplementar="'.$_POST['ItensApuracaoResultados'][$i]['item_apure_acaocomplementar'].'",
+                        tema_id='.$_POST['ItensApuracaoResultados'][$i]['tema_id'].' 
+                    WHERE 
+                        apuracao_id='.$model->apure_id.'
+                    AND 
+                        tema_id='.$_POST['ItensApuracaoResultados'][$i]['tema_id'].'  ');
+                $command->execute();
+            }
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
