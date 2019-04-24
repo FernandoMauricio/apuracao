@@ -24,19 +24,20 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php
     $gridColumns = [
 
-        // [
-        //     'class'=>'kartik\grid\ExpandRowColumn',
-        //     'width'=>'50px',
-        //     'format' => 'raw',
-        //     'value'=>function ($model, $key, $index, $column) {
-        //         return GridView::ROW_COLLAPSED;
-        //     },
-        //     'detail'=>function ($model, $key, $index, $column) {
-        //         return Yii::$app->controller->renderPartial('view-expand', ['model'=>$model, 'modelsPagamentos' => $model->pagamentos, 'modelsAditivos' => $model->aditivos]);
-        //     },
-        //     'headerOptions'=>['class'=>'kartik-sheet-style'], 
-        //     'expandOneOnly'=>true
-        // ],
+        [
+            'class'=>'kartik\grid\ExpandRowColumn',
+            'width'=>'50px',
+            'format' => 'raw',
+            'value'=>function ($model, $key, $index, $column) {
+                return GridView::ROW_COLLAPSED;
+            },
+            'detail'=>function ($model, $key, $index, $column) {
+                return Yii::$app->controller->renderPartial('view-expand', ['model'=>$model, 'apuracaoResultados' => $model->itensApuracaoResultados,
+        ]);
+            },
+            'headerOptions'=>['class'=>'kartik-sheet-style'], 
+            'expandOneOnly'=>true
+        ],
 
         'apure_id',
         'apure_ano',
@@ -62,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'beforeHeader'=>[
         [
             'columns'=>[
-                ['content'=>'Detalhes - Apurações dos Resultados', 'options'=>['colspan'=>4, 'class'=>'text-center warning']], 
+                ['content'=>'Detalhes - Apurações dos Resultados', 'options'=>['colspan'=>5, 'class'=>'text-center warning']], 
                 ['content'=>'Área de Ações', 'options'=>['colspan'=>1, 'class'=>'text-center warning']], 
             ],
         ]
