@@ -8,7 +8,7 @@ use app\models\apuracao\TemaAtividade;
 /* @var $this yii\web\View */
 /* @var $model app\models\apuracao\ItensApuracaoResultados */
 
-
+$session = Yii::$app->session;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="itens-apuracao-resultados-view">
@@ -25,21 +25,19 @@ use app\models\apuracao\TemaAtividade;
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
-    <?php $temas = TemaAtividade::find()->where(['tema_status' => 1])->all(); ?>
-    <?php foreach ($temas as $i => $tema) : ?>
-    <?php $apuracao = ItensApuracaoResultados::find()->where(['apuracao_id' => $model->apure_id])->andWhere(['tema_id' => $i+1])->one(); ?>
-        <div class="panel-heading" role="tab" id="heading<?=$i+1?>">
+    <?php foreach ($model->itensApuracaoResultados as $i => $itensApuracaoResultado) : ?>
+        <div class="panel-heading" role="tab" id="heading<?=$key.'-'.$i?>">
             <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$i+1?>" aria-expanded="true" aria-controls="heading<?=$i+1?>">
-                    <?= $tema->tema_descricao; ?>
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$key.'-'.$i?>" aria-expanded="true" aria-controls="heading<?=$key.'-'.$i?>">
+                    <?= $itensApuracaoResultado->temaAtividade->tema_descricao; ?>
                 </a>
             </h4>
         </div>
 
-        <div id="collapse<?=$i+1?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapse<?=$i+1?>">
+        <div id="collapse<?=$key.'-'.$i?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapse<?=$key.'-'.$i?>">
             <div class="panel-body">
                 <?= DetailView::widget([
-                    'model' => $apuracao,
+                    'model' => $itensApuracaoResultado,
                     'attributes' => [
                         'item_apure_acaorealizada',
                         'item_apure_local',
@@ -51,11 +49,13 @@ use app\models\apuracao\TemaAtividade;
                         'item_apure_acaocomplementar',
                     ],
                 ]) ?>
+
             </div>
         </div>
+        <?php $key++;?>
         <?php endforeach; ?>
+
     </div>
 </div>
-
 
 </div>

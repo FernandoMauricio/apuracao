@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\apuracao\ItensApuracaoResultados */
 
-$this->title = 'Update Itens Apuracao Resultados: ' . $model->apure_id;
-$this->params['breadcrumbs'][] = ['label' => 'Itens Apuracao Resultados', 'url' => ['index']];
+$this->title = 'Atualizar Apuração dos Resultados: ' . $model->apure_id;
+$this->params['breadcrumbs'][] = ['label' => 'Apuração dos Resultados', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->apure_id, 'url' => ['view', 'id' => $model->apure_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Atualizar';
 ?>
 <div class="itens-apuracao-resultados-update">
 

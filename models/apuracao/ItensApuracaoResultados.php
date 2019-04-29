@@ -64,7 +64,7 @@ class ItensApuracaoResultados extends \yii\db\ActiveRecord
             'item_apure_parceiros' => 'Envolveu parceiros?',
             'item_apure_acaocomplementar' => 'Resultados complementares da ação',
             'item_apure_src_arquivo' => 'Src Arquivo',
-            'tema_id' => 'Tema ID',
+            'tema_id' => 'Temas',
             'apuracao_id' => 'Apuracao ID',
         ];
     }

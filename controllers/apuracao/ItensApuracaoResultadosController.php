@@ -64,6 +64,30 @@ class ItensApuracaoResultadosController extends Controller
         ]);
     }
 
+    public function actionGerarApuracao()
+    {
+        $session = Yii::$app->session;
+        $model = new ItensApuracaoResultados;
+
+        $temas = TemaAtividade::find()->all();
+      // $tipoProgramacao  = Tipoprogramacao::find()->all();
+      // $tipoPlanilha     = Tipoplanilha::find()->all();
+      // $situacaoPlanilha = Situacaoplanilha::find()->all();
+      // $tipoRelatorio    = Tiporelatorio::find()->orderBy(['tiprel_descricao'=>SORT_ASC])->all();
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $session->set('sess_temas', $model->tema_id);
+
+            return $this->redirect(['create']);
+        }else{
+            return $this->renderAjax('gerar-apuracao', [
+                'model' => $model,
+                'temas' => $temas,
+            ]);
+        }
+    }
+
     /**
      * Creates a new ItensApuracaoResultados model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -74,7 +98,7 @@ class ItensApuracaoResultadosController extends Controller
         $session = Yii::$app->session;
         $itensApuracao = new ItensApuracaoResultados();
         $model = new ApuracaoResultados();
-        $temas = TemaAtividade::find()->where(['tema_status' => 1])->all();
+        $temas = TemaAtividade::find()->where(['IN', 'tema_id', $session['sess_temas']])->all();
 
         $model->apure_datacriacao = date('Y-m-d H:i:s');
         $model->apure_usuariocriacao = $session['sess_nomeusuario'];

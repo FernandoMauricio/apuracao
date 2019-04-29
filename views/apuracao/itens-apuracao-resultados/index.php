@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\apuracao\ItensApuracaoResultadosSearch */
@@ -16,10 +18,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Nova Apuração', ['create'], ['class' => 'btn btn-success']) ?>
+         <?= Html::button('Nova Apuração', ['value'=> Url::to(['gerar-apuracao']), 'class' => 'btn btn-success', 'id'=>'modalButton']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<?php
+    Modal::begin([
+        'options' => ['tabindex' => false ], // important for Select2 to work properly
+        'clientOptions' => ['backdrop' => 'static', 'keyboard' => true],
+        'header' => '<h4>Nova Apuração</h4>',
+        'id' => 'modal',
+        'size' => 'modal-lg',
+        ]);
+    echo "<div id='modalContent'></div>";
+    Modal::end();
+?>
 
 <?php
     $gridColumns = [
@@ -32,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return GridView::ROW_COLLAPSED;
             },
             'detail'=>function ($model, $key, $index, $column) {
-                return Yii::$app->controller->renderPartial('view-expand', ['model'=>$model, 'apuracaoResultados' => $model->itensApuracaoResultados,
+                return Yii::$app->controller->renderPartial('view-expand', ['model'=>$model, 'apuracaoResultados' => $model->itensApuracaoResultados, 'key'=>$key,
         ]);
             },
             'headerOptions'=>['class'=>'kartik-sheet-style'], 

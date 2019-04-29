@@ -39,12 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
-    <?php foreach ($temas as $i => $tema) : ?>
-    <?php $apuracao = ItensApuracaoResultados::find()->where(['apuracao_id' => $model->apure_id])->andWhere(['tema_id' => $i+1])->one(); ?>
+    <?php foreach ($model->itensApuracaoResultados as $i => $itensApuracaoResultado) : ?>
         <div class="panel-heading" role="tab" id="heading<?=$i+1?>">
             <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$i+1?>" aria-expanded="true" aria-controls="heading<?=$i+1?>">
-                    <?= $tema->tema_descricao; ?>
+                    <?= $itensApuracaoResultado->temaAtividade->tema_descricao; ?>
                 </a>
             </h4>
         </div>
@@ -52,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div id="collapse<?=$i+1?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapse<?=$i+1?>">
             <div class="panel-body">
                 <?= DetailView::widget([
-                    'model' => $apuracao,
+                    'model' => $itensApuracaoResultado,
                     'attributes' => [
                         'item_apure_acaorealizada',
                         'item_apure_local',
